@@ -49,7 +49,7 @@ public class AuthController {
     }
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/logout-all")
-    public ResponseEntity<ApiResponse<Object>> logoutAll() {
+    public ResponseEntity<ApiResponse<Integer>> logoutAll() { // Changed generic to Integer
 
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -63,7 +63,7 @@ public class AuthController {
         return ResponseEntity.ok(
                 new ApiResponse<>(
                         "logout successfully",
-                        authService.logoutAll(email),
+                        authService.logoutAll(email), // Now returns an int
                         200,
                         java.time.LocalDateTime.now()
                 )

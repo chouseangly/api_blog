@@ -12,5 +12,5 @@ public interface AuthService extends UserDetailsService {
 
      LoginResponse login(LoginRequest loginRequest);
 
-     Object logoutAll(String email);
+     int logoutAll(String email);
 }

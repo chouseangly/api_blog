@@ -31,6 +31,11 @@ values(#{userName},#{email},#{password},0,now()) returning *
     Auth register(Auth auth);
 
     @Update("UPDATE users SET token_version = token_version + 1 WHERE user_id = #{userId}")
+    int incrementTokenVersion(long userId);
+
+    @Select("""
+select * from users where user_id = #{userId}
+""")
     @ResultMap("AuthMapper")
-    Object incrementTokenVersion(long userId);
+    Auth findByUserId(long userId);
 }

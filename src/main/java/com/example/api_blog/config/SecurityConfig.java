@@ -56,10 +56,11 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
-                                "/api/v1/auths/**"
+                                "/api/v1/auths/login", "/api/v1/auths/register"
 
                         ).permitAll()
-
+                        .requestMatchers("/api/v1/auths/logout-all").authenticated() // Require login for logout
+                        .requestMatchers("/api/v1/posts/add-post").authenticated()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthEntrypoint))

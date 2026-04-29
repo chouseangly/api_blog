@@ -59,17 +59,12 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public Object logoutAll(String email) {
-
-        System.out.println("👉 EMAIL FROM TOKEN = [" + email + "]");
-
+    public int logoutAll(String email) {
         Auth auth = authRepo.findByEmail(email);
 
         if (auth == null) {
-            System.out.println("👉 DB RETURNED NULL for email = [" + email + "]");
             throw new RuntimeException("User not found");
         }
-
         return authRepo.incrementTokenVersion(auth.getUserId());
     }
 
