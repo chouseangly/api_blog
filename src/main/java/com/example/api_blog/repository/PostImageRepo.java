@@ -1,10 +1,7 @@
 package com.example.api_blog.repository;
 
 import com.example.api_blog.model.entity.PostImage;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.*;
 import org.springframework.core.env.PropertyResolver;
 
 import java.util.List;
@@ -25,5 +22,5 @@ public interface PostImageRepo {
             @Result(property = "postId",column = "post_id"),
             @Result(property = "imageUrl",column = "image_url")
     })
-    void insertImage(List<PostImage> images);
+    void insertImage(@Param("images") List<PostImage> images);
 }
