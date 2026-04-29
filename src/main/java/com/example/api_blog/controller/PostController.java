@@ -11,10 +11,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -26,16 +23,15 @@ import java.time.LocalDateTime;
 public class PostController {
     private final PostService postService;
     @SecurityRequirement(name = "bearerAuth")
-    @PostMapping(value = "/add-post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    // Update your method in PostController.java
+    @PostMapping(value = "/add-post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<PostResponse>> addPost(
-            @RequestPart("data") @io.swagger.v3.oas.annotations.Parameter(schema = @io.swagger.v3.oas.annotations.media.Schema(type = "string", format = "json")) PostRequest postRequest,
-            @RequestPart("files")MultipartFile[] files
-            ) {
-
-      PostResponse post  = postService.addPost(postRequest,files);
-
+            @ModelAttribute PostRequest postRequest, // Changed from @RequestPart to @ModelAttribute
+            @RequestPart("files") MultipartFile[] files
+    ) {
+        PostResponse post = postService.addPost(postRequest, files);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ApiResponse<>("Add post successfully", post ,HttpStatus.OK.value(), LocalDateTime.now())
+                new ApiResponse<>("Add post successfully", post, HttpStatus.OK.value(), LocalDateTime.now())
         );
     }
 }
