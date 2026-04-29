@@ -8,9 +8,8 @@ import org.apache.ibatis.annotations.Results;
 
 @Mapper
 public interface PostRepo {
-    @Insert("""
-    insert into posts(title,description,user_id) values (#{tilte},#{description},"userId")
-""")
+@Insert("insert into posts(title,description,user_id) values (#{title},#{description},#{userId})")
+
     @Results(id = "PostMapper",value = {
             @Result(property = "title",column = "title"),
             @Result(property = "description",column = "description"),

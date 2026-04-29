@@ -22,7 +22,7 @@ public class Auth implements UserDetails {
     private String userName;
     private String email;
     private String password;
-    private int tokenVersion = 0;
+    private Integer tokenVersion = 0;
     private Timestamp createdAt;
 
     @JsonIgnore

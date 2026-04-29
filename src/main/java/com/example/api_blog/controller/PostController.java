@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @SecurityRequirement(name = "bearerAuth")
 public class PostController {
     private final PostService postService;
-
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping(value = "/add-post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<PostResponse>> addPost(
             @RequestPart("data")PostRequest postRequest,

@@ -57,6 +57,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             Auth auth = authRepo.findByEmail(email);
 
+
             if (auth == null) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
@@ -68,6 +69,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
+            System.out.println("Token Version: " + tokenVersion);
+            System.out.println("DB Version: " + auth.getTokenVersion());
 
             if (jwtService.validateToken(token, userDetails)) {
 
@@ -88,4 +91,5 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
 }

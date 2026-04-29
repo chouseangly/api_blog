@@ -14,7 +14,12 @@ public interface PostImageRepo {
 
 
     @Insert("""
-insert into post_image(post_id,image_url) values(#{postId},#{imageUrl})
+    <script>
+    INSERT INTO post_image (post_id, image_url) VALUES 
+    <foreach collection='images' item='image' separator=','>
+        (#{image.postId}, #{image.imageUrl})
+    </foreach>
+    </script>
 """)
     @Results(id = "postImageMapper",value = {
             @Result(property = "postId",column = "post_id"),
