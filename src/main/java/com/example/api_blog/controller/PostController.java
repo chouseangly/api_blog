@@ -28,7 +28,7 @@ public class PostController {
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping(value = "/add-post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<PostResponse>> addPost(
-            @RequestPart("data")PostRequest postRequest,
+            @RequestPart("data") @io.swagger.v3.oas.annotations.Parameter(schema = @io.swagger.v3.oas.annotations.media.Schema(type = "string", format = "json")) PostRequest postRequest,
             @RequestPart("files")MultipartFile[] files
             ) {
 
